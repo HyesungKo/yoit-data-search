@@ -19,7 +19,7 @@ function SideBar() {
     };
 
     return (
-        <Box sx={{ width: "18%", height: "100vh"}}>
+        <Box sx={{ width: "12%", height: "100vh"}}>
             <Box sx={{ display: "flex", padding: 2 }}>
                 <img style={{ marginLeft: "auto", marginRight: "auto"}} src={logo} alt="yoit logo" />
             </Box>
