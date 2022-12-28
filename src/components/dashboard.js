@@ -29,35 +29,24 @@ function Dashboard() {
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        setBrands({});
-        setCategories({});
-        setItems([])
         data.forEach(item => {
-            if(brands[item.brand] === undefined) {
-                brands[item.brand] = 1;
-                setBrands(brands);
-            } else {
-                brands[item.brand] += 1;
-                setBrands(brands)
-            }
-            if(categories[item.category] === undefined) {
-                categories[item.category] = 1;
-                setCategories(categories);
-            } else {
-                categories[item.category] += 1;
-                setCategories(categories)
-            }
-
-            setItems(prevItems => 
-                [...prevItems, item]
-            )
-        });        
-    }, [data])
+            setBrands(prevBrands => ({
+                ...prevBrands,
+                [item.brand]: prevBrands[item.brand] === undefined ? 1 : prevBrands[item.brand] + 1
+            }));
+            
+            setCategories(prevCategories => ({
+                ...prevCategories,
+                [item.category]: prevCategories[item.category] === undefined ? 1 : prevCategories[item.category] + 1
+            }));
+        });
+        setItems(data)
+    }, [])
 
     return (
-        <Box sx={{width: "85%", height: "100vh", overflow: "auto"}}>
-            <Box sx={{display: "flex", width: "100%", height: "8vh", backgroundColor: "yellow"}}>
-                <Typography mx={5} variant="h5" mt={3}>
+        <Box sx={{width: "87%", height: "100vh", overflow: "auto"}}>
+            <Box sx={{display: "flex", width: "100%", height: "8vh"}}>
+                <Typography mx={5} variant="h4" mt={5}>
                     Dashboard
                 </Typography>
             </Box>
@@ -107,9 +96,9 @@ function Dashboard() {
                 <Grid px={3} py={1} container spacing={5} height={"70%"}>
                     <Grid item xs={3} sx={{paddingTop: "10px !important"}}>
                         <Typography mb={1} variant='h6'>
-                            By Brands
+                            Brands
                         </Typography>
-                        <TextField size='small' fullWidth id="outlined-basic" label="Type Brand" variant="outlined" />
+                        <TextField size='small' fullWidth id="outlined-basic" label="Search Brand" variant="outlined" />
                         <DataGrid
                             sx={{marginTop: 1, height: "90%"}}
                             rows={Object.keys(brands).map((key, index) => ({
@@ -125,9 +114,9 @@ function Dashboard() {
                     </Grid>
                     <Grid item xs={3} sx={{paddingTop: "10px !important"}}>
                         <Typography mb={1} variant='h6'>
-                            By Categories
+                            Categories
                         </Typography>
-                        <TextField size='small' fullWidth id="outlined-basic" label="Type Category" variant="outlined" />
+                        <TextField size='small' fullWidth id="outlined-basic" label="Search Category" variant="outlined" />
                         <DataGrid
                             sx={{marginTop: 1, height: "90%"}}
                             rows={Object.keys(categories).map((key, index) => ({
@@ -143,9 +132,9 @@ function Dashboard() {
                     </Grid>
                     <Grid item xs={6} sx={{paddingTop: "10px !important"}}>
                         <Typography mb={1} variant='h6'>
-                            Item List
+                            Items
                         </Typography>
-                        <TextField size='small' fullWidth id="outlined-basic" label="Type Item Name" variant="outlined" />
+                        <TextField size='small' fullWidth id="outlined-basic" label="Search Item" variant="outlined" />
                         <DataGrid
                             sx={{marginTop: 1, height: "90%"}}
                             rows={items}

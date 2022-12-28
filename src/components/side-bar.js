@@ -19,8 +19,8 @@ function SideBar() {
     };
 
     return (
-        <Box sx={{ width: "12%", height: "100vh"}}>
-            <Box sx={{ display: "flex", padding: 2 }}>
+        <Box sx={{ width: "13%", height: "100vh"}}>
+            <Box my={3} sx={{ display: "flex", padding: 2 }}>
                 <img style={{ marginLeft: "auto", marginRight: "auto"}} src={logo} alt="yoit logo" />
             </Box>
             <Divider />
